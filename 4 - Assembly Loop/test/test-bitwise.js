@@ -20,11 +20,18 @@ contract("BitWise", () => {
         expect(gas).to.be.gt(gasAsm, "Assembly should be more gas efficient");
     });
 
-    it('countBitSet() and countBitSetAsm() should return the same results', async () => {
-        const myNumber = 250;
-        const result = await bitwise.countBitSet(myNumber);
-        const resultAsm = await bitwise.countBitSetAsm(myNumber);
-        expect(result).to.be.a.bignumber.that.equal(resultAsm, "result should match");
+    describe('#countBitSet', () => {
+        it('should return 0 for input = 0', async () => {
+            const myNumber = 0;
+            const resultAsm = await bitwise.countBitSet(myNumber);
+            expect(resultAsm).to.be.a.bignumber.that.equal(new BigNumber(0), "result should match");
+        });
+
+        it('should return 6 for input = 250', async () => {
+            const myNumber = 250;
+            const resultAsm = await bitwise.countBitSet(myNumber);
+            expect(resultAsm).to.be.a.bignumber.that.equal(new BigNumber(6), "result should match");
+        });
     });
 
     describe('#countBitSetAsm', () => {
@@ -32,6 +39,12 @@ contract("BitWise", () => {
             const myNumber = 0;
             const resultAsm = await bitwise.countBitSetAsm(myNumber);
             expect(resultAsm).to.be.a.bignumber.that.equal(new BigNumber(0), "result should match");
+        });
+
+        it('should return 6 for input = 250', async () => {
+            const myNumber = 250;
+            const resultAsm = await bitwise.countBitSetAsm(myNumber);
+            expect(resultAsm).to.be.a.bignumber.that.equal(new BigNumber(6), "result should match");
         });
     });
 });

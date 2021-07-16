@@ -34,7 +34,7 @@ contract("ProxyDelegate", accounts => {
             });
     })
 
-    it("setVersion by delegatecall should update version in the ProxyDelegate contract", async () => {
+    it("setVersion by delegatecall should leave SomeLibrary version and ProxyDelegate owner intact", async () => {
         const expectedVersion = 3;
         // generate the function selector for setVersion
         const selector = utils.id("setVersion(uint256)").slice(0, 10);
